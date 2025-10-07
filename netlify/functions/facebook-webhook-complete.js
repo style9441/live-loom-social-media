@@ -179,17 +179,10 @@ async function sendPrivateReply(comment) {
 function createPersonalizedMessage(commenterName, commentText) {
   const name = commenterName || 'there';
   
-  // Simple message templates
-  const messages = [
-    `Hi ${name}! 👋 Thanks for your comment! We're excited to connect with you. Feel free to reach out if you have any questions!`,
-    `Hey ${name}! 😊 Thanks for engaging with our content! We'd love to hear more from you. Drop us a message anytime!`,
-    `Hello ${name}! 🎉 Thanks for your comment! We appreciate your support and would love to connect with you personally.`,
-    `Hi ${name}! 💫 Thanks for your comment! We're here to help and would love to chat with you. Send us a message!`
-  ];
+  // Use the specific message template requested
+  const message = `Hi ${name}! 🛍️ Thanks for your interest! We'd love to tell you more about our products`;
   
-  // Select message based on comment content or random
-  const messageIndex = Math.floor(Math.random() * messages.length);
-  return messages[messageIndex];
+  return message;
 }
 
 // Function to log interactions for analytics
