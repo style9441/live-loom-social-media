@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Loom Social Media - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            padding: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .template-list {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .template-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .template-content {
+            flex: 1;
+        }
+        
+        .template-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .template-text {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active {
+            background: #28a745;
+        }
+        
+        .status-inactive {
+            background: #dc3545;
+        }
+        
+        .recent-comments {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .comment-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .commenter-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .comment-time {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .comment-text {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .comment-status {
+            font-size: 0.9em;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .status-replied {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Live Loom Social Media</h1>
+            <p>Private Reply System - Admin Dashboard</p>
+        </div>
+        
+        <div class="dashboard">
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalComments">0</div>
+                    <div class="stat-label">Total Comments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="repliedComments">0</div>
+                    <div class="stat-label">Replied Comments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="activeTemplates">0</div>
+                    <div class="stat-label">Active Templates</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="responseRate">0%</div>
+                    <div class="stat-label">Response Rate</div>
+                </div>
+            </div>
+            
+            <!-- Reply Templates -->
+            <div class="section">
+                <h2>📝 Reply Templates</h2>
+                <div class="template-list" id="templateList">
+                    <!-- Templates will be loaded here -->
+                </div>
+                <button class="btn btn-primary" onclick="openAddTemplateModal()">Add New Template</button>
+            </div>
+            
+            <!-- Recent Comments -->
+            <div class="section">
+                <h2>💬 Recent Comments</h2>
+                <div class="recent-comments" id="recentComments">
+                    <!-- Comments will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- System Status -->
+            <div class="section">
+                <h2>⚙️ System Status</h2>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <div>
+                        <span class="status-indicator status-active"></span>
+                        <strong>Webhook Status:</strong> Active
+                    </div>
+                    <div>
+                        <span class="status-indicator status-active"></span>
+                        <strong>Auto-Reply:</strong> Enabled
+                    </div>
+                    <div>
+                        <span class="status-indicator status-active"></span>
+                        <strong>Database:</strong> Connected
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Template Modal -->
+    <div id="addTemplateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddTemplateModal()">&times;</span>
+            <h2>Add New Template</h2>
+            <form id="addTemplateForm">
+                <div class="form-group">
+                    <label for="templateName">Template Name:</label>
+                    <input type="text" id="templateName" required>
+                </div>
+                <div class="form-group">
+                    <label for="templateText">Template Text:</label>
+                    <textarea id="templateText" placeholder="Use {{name}} for personalization" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Template</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Sample data - in real implementation, this would come from your API
+        const templates = [
+            {
+                id: 1,
+                name: "Welcome Message 1",
+                template: "Hi {{name}}! 👋 Thanks for your comment! We're excited to connect with you.",
+                is_active: true
+            },
+            {
+                id: 2,
+                name: "Welcome Message 2",
+                template: "Hey {{name}}! 😊 Thanks for engaging with our content!",
+                is_active: true
+            },
+            {
+                id: 3,
+                name: "Product Inquiry",
+                template: "Hi {{name}}! 🛍️ Thanks for your interest! We'd love to tell you more.",
+                is_active: false
+            }
+        ];
+        
+        const recentComments = [
+            {
+                id: 1,
+                commenter_name: "John Doe",
+                comment_text: "Great post! Love your content!",
+                timestamp: "2025-10-07T10:30:00Z",
+                replied: true
+            },
+            {
+                id: 2,
+                commenter_name: "Jane Smith",
+                comment_text: "Can you tell me more about your products?",
+                timestamp: "2025-10-07T10:25:00Z",
+                replied: false
+            },
+            {
+                id: 3,
+                commenter_name: "Mike Johnson",
+                comment_text: "Amazing work! Keep it up!",
+                timestamp: "2025-10-07T10:20:00Z",
+                replied: true
+            }
+        ];
+        
+        // Initialize dashboard
+        function initDashboard() {
+            loadTemplates();
+            loadRecentComments();
+            updateStats();
+        }
+        
+        // Load templates
+        function loadTemplates() {
+            const templateList = document.getElementById('templateList');
+            templateList.innerHTML = '';
+            
+            templates.forEach(template => {
+                const templateItem = document.createElement('div');
+                templateItem.className = 'template-item';
+                templateItem.innerHTML = `
+                    <div class="template-content">
+                        <div class="template-name">
+                            <span class="status-indicator ${template.is_active ? 'status-active' : 'status-inactive'}"></span>
+                            ${template.name}
+                        </div>
+                        <div class="template-text">${template.template}</div>
+                    </div>
+                    <div class="template-actions">
+                        <button class="btn ${template.is_active ? 'btn-secondary' : 'btn-success'}" 
+                                onclick="toggleTemplate(${template.id})">
+                            ${template.is_active ? 'Disable' : 'Enable'}
+                        </button>
+                        <button class="btn btn-primary" onclick="editTemplate(${template.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteTemplate(${template.id})">Delete</button>
+                    </div>
+                `;
+                templateList.appendChild(templateItem);
+            });
+        }
+        
+        // Load recent comments
+        function loadRecentComments() {
+            const recentCommentsDiv = document.getElementById('recentComments');
+            recentCommentsDiv.innerHTML = '';
+            
+            recentComments.forEach(comment => {
+                const commentItem = document.createElement('div');
+                commentItem.className = 'comment-item';
+                commentItem.innerHTML = `
+                    <div class="comment-header">
+                        <div class="commenter-name">${comment.commenter_name}</div>
+                        <div class="comment-time">${new Date(comment.timestamp).toLocaleString()}</div>
+                    </div>
+                    <div class="comment-text">${comment.comment_text}</div>
+                    <div class="comment-status ${comment.replied ? 'status-replied' : 'status-pending'}">
+                        ${comment.replied ? 'Replied' : 'Pending Reply'}
+                    </div>
+                `;
+                recentCommentsDiv.appendChild(commentItem);
+            });
+        }
+        
+        // Update statistics
+        function updateStats() {
+            document.getElementById('totalComments').textContent = recentComments.length;
+            document.getElementById('repliedComments').textContent = recentComments.filter(c => c.replied).length;
+            document.getElementById('activeTemplates').textContent = templates.filter(t => t.is_active).length;
+            
+            const responseRate = recentComments.length > 0 ? 
+                Math.round((recentComments.filter(c => c.replied).length / recentComments.length) * 100) : 0;
+            document.getElementById('responseRate').textContent = responseRate + '%';
+        }
+        
+        // Template management functions
+        function toggleTemplate(id) {
+            const template = templates.find(t => t.id === id);
+            if (template) {
+                template.is_active = !template.is_active;
+                loadTemplates();
+                updateStats();
+            }
+        }
+        
+        function editTemplate(id) {
+            const template = templates.find(t => t.id === id);
+            if (template) {
+                document.getElementById('templateName').value = template.name;
+                document.getElementById('templateText').value = template.template;
+                openAddTemplateModal();
+            }
+        }
+        
+        function deleteTemplate(id) {
+            if (confirm('Are you sure you want to delete this template?')) {
+                const index = templates.findIndex(t => t.id === id);
+                if (index > -1) {
+                    templates.splice(index, 1);
+                    loadTemplates();
+                    updateStats();
+                }
+            }
+        }
+        
+        // Modal functions
+        function openAddTemplateModal() {
+            document.getElementById('addTemplateModal').style.display = 'block';
+        }
+        
+        function closeAddTemplateModal() {
+            document.getElementById('addTemplateModal').style.display = 'none';
+            document.getElementById('addTemplateForm').reset();
+        }
+        
+        // Add template form
+        document.getElementById('addTemplateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('templateName').value;
+            const template = document.getElementById('templateText').value;
+            
+            const newTemplate = {
+                id: templates.length + 1,
+                name: name,
+                template: template,
+                is_active: true
+            };
+            
+            templates.push(newTemplate);
+            loadTemplates();
+            updateStats();
+            closeAddTemplateModal();
+        });
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('addTemplateModal');
+            if (event.target === modal) {
+                closeAddTemplateModal();
+            }
+        };
+        
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>
