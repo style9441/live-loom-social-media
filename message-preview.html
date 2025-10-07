@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Template Preview</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .message-preview {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        
+        .message-text {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .examples {
+            margin-top: 30px;
+        }
+        
+        .example {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .example-name {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 5px;
+        }
+        
+        .example-message {
+            color: #333;
+        }
+        
+        .status {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Live Loom Social Media</h1>
+            <p>Private Reply Message Template</p>
+        </div>
+        
+        <div class="message-preview">
+            <div class="message-text">
+                Hi <strong>{{name}}</strong>! <span class="emoji">🛍️</span> Thanks for your interest! We'd love to tell you more about our products
+            </div>
+        </div>
+        
+        <div class="examples">
+            <h3>Message Examples:</h3>
+            
+            <div class="example">
+                <div class="example-name">Commenter: John Doe</div>
+                <div class="example-message">Hi John! 🛍️ Thanks for your interest! We'd love to tell you more about our products</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-name">Commenter: Jane Smith</div>
+                <div class="example-message">Hi Jane! 🛍️ Thanks for your interest! We'd love to tell you more about our products</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-name">Commenter: Mike Johnson</div>
+                <div class="example-message">Hi Mike! 🛍️ Thanks for your interest! We'd love to tell you more about our products</div>
+            </div>
+            
+            <div class="example">
+                <div class="example-name">Commenter: (No name available)</div>
+                <div class="example-message">Hi there! 🛍️ Thanks for your interest! We'd love to tell you more about our products</div>
+            </div>
+        </div>
+        
+        <div class="status">
+            <strong>✅ Template Active</strong><br>
+            This message will be sent to every person who comments on your Facebook page posts.
+        </div>
+    </div>
+    
+    <script>
+        // Show current timestamp
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const timestamp = now.toLocaleString();
+            console.log('Template preview loaded at:', timestamp);
+        });
+    </script>
+</body>
+</html>
