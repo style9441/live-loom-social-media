@@ -242,35 +242,8 @@ async function sendPrivateReply(comment) {
 function createPersonalizedMessage(commenterName, commentText) {
   const name = commenterName || 'there';
   
-  // Get active templates
-  const activeTemplates = replyTemplates.templates.filter(t => t.is_active);
-  
-  // Select template based on comment content or random
-  let selectedTemplate;
-  
-  // Check for keywords in comment
-  const lowerComment = commentText.toLowerCase();
-  
-  if (lowerComment.includes('product') || lowerComment.includes('buy') || lowerComment.includes('price')) {
-    selectedTemplate = activeTemplates.find(t => t.name === 'Product Inquiry') || activeTemplates[0];
-  } else if (lowerComment.includes('help') || lowerComment.includes('support') || lowerComment.includes('problem')) {
-    selectedTemplate = activeTemplates.find(t => t.name === 'Support Message') || activeTemplates[0];
-  } else if (replyTemplates.settings.randomize_templates) {
-    // Random selection
-    const randomIndex = Math.floor(Math.random() * activeTemplates.length);
-    selectedTemplate = activeTemplates[randomIndex];
-  } else {
-    // Use default template
-    selectedTemplate = activeTemplates.find(t => t.id === replyTemplates.settings.default_template) || activeTemplates[0];
-  }
-  
-  // Replace template variables
-  let message = selectedTemplate.template.replace(/\{\{name\}\}/g, name);
-  
-  // Ensure message length is within limits
-  if (message.length > replyTemplates.settings.max_message_length) {
-    message = message.substring(0, replyTemplates.settings.max_message_length - 3) + '...';
-  }
+  // Use the specific message template requested
+  const message = `Hi ${name}! 🛍️ Thanks for your interest! We'd love to tell you more about our products`;
   
   return message;
 }
