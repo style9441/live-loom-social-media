@@ -75,7 +75,7 @@ Update `mcp.json` with your GitHub token:
         "YOUR_ACTUAL_GITHUB_TOKEN"
       ],
       "env": {
-        "GITHUB_REPO": "shivomaswal/live-loom-social-media",
+        "GITHUB_REPO": "style9441/live-loom-social-media",
         "AUTO_SYNC": "true"
       }
     }
