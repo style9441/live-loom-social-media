@@ -1,0 +1,33 @@
+{
+  "name": "live-loom-social-media",
+  "version": "1.0.0",
+  "description": "Live Loom Social Media Auto-Reply System with GitHub Sync",
+  "main": "github-sync.js",
+  "scripts": {
+    "start": "node webhook-server.js",
+    "dev": "nodemon webhook-server.js",
+    "sync": "node github-sync.js",
+    "sync:watch": "node github-sync.js --watch",
+    "create-repo": "node github-sync.js --create-repo",
+    "setup": "node github-sync.js --create-repo && node github-sync.js --watch"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shivomaswal/live-loom-social-media.git"
+  },
+  "keywords": [
+    "facebook",
+    "webhook",
+    "auto-reply",
+    "social-media",
+    "supabase"
+  ],
+  "author": "Live Loom Team",
+  "license": "MIT"
+}

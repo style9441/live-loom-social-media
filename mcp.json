@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "live-loom-social-media": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/shivomaswal/Documents/demo social media streamin"
+      ],
+      "env": {
+        "PROJECT_NAME": "Live Loom Social media"
+      }
+    },
+    "github-sync": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-github",
+        "--token",
+        "YOUR_GITHUB_TOKEN_HERE"
+      ],
+      "env": {
+        "GITHUB_REPO": "shivomaswal/live-loom-social-media",
+        "AUTO_SYNC": "true"
+      }
+    }
+  }
+}

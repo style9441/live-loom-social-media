@@ -1,0 +1,12 @@
+{
+  "name": "facebook-webhook-glitch",
+  "version": "1.0.0",
+  "description": "Facebook webhook for Glitch deployment",
+  "main": "glitch-webhook.js",
+  "scripts": {
+    "start": "node glitch-webhook.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

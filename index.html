@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Webhook Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .url {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .test-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .test-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Facebook Webhook Server</h1>
+        
+        <div class="status success">
+            <h3>✅ Server is Running!</h3>
+            <p>Your Facebook webhook is deployed and ready to receive events.</p>
+        </div>
+        
+        <div class="status info">
+            <h3>📋 Webhook Configuration</h3>
+            <p><strong>Webhook URL:</strong></p>
+            <div class="url" id="webhookUrl">Loading...</div>
+            <p><strong>Verify Token:</strong> <code>live_loom_verify_123</code></p>
+        </div>
+        
+        <h3>🧪 Test Your Webhook</h3>
+        <p>Click the button below to test your webhook verification:</p>
+        <button class="test-button" onclick="testWebhook()">Test Webhook Verification</button>
+        <div id="testResult"></div>
+        
+        <h3>📖 Instructions</h3>
+        <ol>
+            <li>Copy the webhook URL above</li>
+            <li>Go to your Facebook App dashboard</li>
+            <li>Navigate to Webhooks section</li>
+            <li>Add webhook with the URL and verify token</li>
+            <li>Subscribe to "feed" events</li>
+            <li>Test by commenting on your Facebook page</li>
+        </ol>
+        
+        <h3>🔍 What to Expect</h3>
+        <ul>
+            <li>Webhook verification should return the challenge value</li>
+            <li>Comment events will be logged to Netlify function logs</li>
+            <li>You can view logs in your Netlify dashboard</li>
+        </ul>
+    </div>
+
+    <script>
+        // Get the current domain and construct webhook URL
+        const webhookUrl = window.location.origin + '/.netlify/functions/webhook';
+        document.getElementById('webhookUrl').textContent = webhookUrl;
+        
+        // Test webhook function
+        async function testWebhook() {
+            const testUrl = webhookUrl + '?hub.mode=subscribe&hub.challenge=test123&hub.verify_token=live_loom_verify_123';
+            const resultDiv = document.getElementById('testResult');
+            
+            try {
+                resultDiv.innerHTML = '<p>Testing webhook...</p>';
+                const response = await fetch(testUrl);
+                const result = await response.text();
+                
+                if (result === 'test123') {
+                    resultDiv.innerHTML = '<div class="status success">✅ Webhook test successful! Response: ' + result + '</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="status error">❌ Webhook test failed. Response: ' + result + '</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="status error">❌ Webhook test failed. Error: ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>

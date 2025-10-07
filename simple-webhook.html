@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facebook Webhook Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test-section { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .url { background: #e8f4fd; padding: 10px; border-radius: 3px; font-family: monospace; }
+        .instructions { background: #fff3cd; padding: 15px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Facebook Webhook Test</h1>
+        
+        <div class="test-section">
+            <h2>Step 1: Get a Public Webhook URL</h2>
+            <p>Since ngrok requires authentication, use one of these free services:</p>
+            
+            <h3>Option A: webhook.site (Recommended)</h3>
+            <div class="instructions">
+                <p>1. Go to <a href="https://webhook.site" target="_blank">webhook.site</a></p>
+                <p>2. Copy the unique URL (e.g., <code>https://webhook.site/abc123-def456</code>)</p>
+                <p>3. Use this URL in Facebook webhook settings</p>
+            </div>
+            
+            <h3>Option B: requestbin.com</h3>
+            <div class="instructions">
+                <p>1. Go to <a href="https://requestbin.com" target="_blank">requestbin.com</a></p>
+                <p>2. Create a new bin</p>
+                <p>3. Copy the URL and use it in Facebook</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Step 2: Facebook Webhook Settings</h2>
+            <p>In your Facebook App webhook settings, use:</p>
+            <div class="url">
+                <strong>Webhook URL:</strong> [Your webhook.site URL]<br>
+                <strong>Verify Token:</strong> live_loom_verify_123
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Step 3: Test the Webhook</h2>
+            <p>Test your webhook URL directly:</p>
+            <div class="url">
+                <strong>Test URL:</strong> [Your webhook.site URL]?hub.mode=subscribe&hub.challenge=test123&hub.verify_token=live_loom_verify_123
+            </div>
+            <p>This should return: <code>test123</code></p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Step 4: Common Issues</h2>
+            <ul>
+                <li><strong>HTTPS Required:</strong> Facebook only accepts HTTPS URLs</li>
+                <li><strong>Exact Token Match:</strong> Verify token must match exactly</li>
+                <li><strong>Public URL:</strong> URL must be accessible from internet</li>
+                <li><strong>App Status:</strong> Make sure your Facebook app is in Development mode</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h2>Step 5: Alternative - Use Supabase with Custom Domain</h2>
+            <p>If you want to use Supabase, you need to:</p>
+            <ol>
+                <li>Add a custom domain to your Supabase project</li>
+                <li>Or use Supabase's built-in webhook functionality</li>
+                <li>Or create a simple serverless function on Vercel/Netlify</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Test the local webhook
+        function testLocalWebhook() {
+            fetch('http://localhost:3000/webhook?hub.mode=subscribe&hub.challenge=test123&hub.verify_token=live_loom_verify_123')
+                .then(response => response.text())
+                .then(data => {
+                    alert('Local webhook test result: ' + data);
+                })
+                .catch(error => {
+                    alert('Local webhook test failed: ' + error);
+                });
+        }
+    </script>
+    
+    <button onclick="testLocalWebhook()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Test Local Webhook
+    </button>
+</body>
+</html>
