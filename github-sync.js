@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 // GitHub repository configuration
-const GITHUB_REPO = 'shivomaswal/live-loom-social-media';
+const GITHUB_REPO = 'style9441/live-loom-social-media';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || 'YOUR_GITHUB_TOKEN_HERE';
 const PROJECT_DIR = '/Users/shivomaswal/Documents/demo social media streamin';
 
