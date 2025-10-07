@@ -1,0 +1,46 @@
+{
+  "templates": [
+    {
+      "id": 1,
+      "name": "Welcome Message 1",
+      "template": "Hi {{name}}! 👋 Thanks for your comment! We're excited to connect with you. Feel free to reach out if you have any questions!",
+      "is_active": true
+    },
+    {
+      "id": 2,
+      "name": "Welcome Message 2", 
+      "template": "Hey {{name}}! 😊 Thanks for engaging with our content! We'd love to hear more from you. Drop us a message anytime!",
+      "is_active": true
+    },
+    {
+      "id": 3,
+      "name": "Welcome Message 3",
+      "template": "Hello {{name}}! 🎉 Thanks for your comment! We appreciate your support and would love to connect with you personally.",
+      "is_active": true
+    },
+    {
+      "id": 4,
+      "name": "Welcome Message 4",
+      "template": "Hi {{name}}! 💫 Thanks for your comment! We're here to help and would love to chat with you. Send us a message!",
+      "is_active": true
+    },
+    {
+      "id": 5,
+      "name": "Product Inquiry",
+      "template": "Hi {{name}}! 🛍️ Thanks for your interest! We'd love to tell you more about our products. Send us a message and we'll get back to you right away!",
+      "is_active": true
+    },
+    {
+      "id": 6,
+      "name": "Support Message",
+      "template": "Hello {{name}}! 🆘 We're here to help! If you need any support or have questions, just send us a message and our team will assist you.",
+      "is_active": true
+    }
+  ],
+  "settings": {
+    "default_template": 1,
+    "randomize_templates": true,
+    "include_emoji": true,
+    "max_message_length": 1000
+  }
+}
